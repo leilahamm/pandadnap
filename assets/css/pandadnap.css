@@ -1,0 +1,32 @@
+---
+---
+
+.header-section:not(.has-img) {
+  background: linear-gradient(120deg, #fff1dc 0%, #f8d9e3 52%, #d9f0f3 100%);
+}
+
+.header-section:not(.has-img) .page-heading h1 {
+  color: #493047;
+}
+
+.header-section:not(.has-img) .page-subheading {
+  color: #79526f;
+  font-weight: 600;
+}
+
+.project-logo-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.project-logo {
+  display: block;
+  width: min(100%, 22rem);
+  height: auto;
+  border-radius: 50%;
+}
+
+footer .footer-links .fa-stack-2x {
+  color: #e98f9e;
+}
