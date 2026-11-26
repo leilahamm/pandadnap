@@ -1,9 +1,265 @@
 ---
-layout: page
-title: PANDADNAP
-subtitle: Our data story
+layout: base
+title: PANDADNAP — Caption Contest Casino
+subtitle: A data story about captions and chance.
+head-extra:
+  - casino-favicon.html
+ext-css:
+  - https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap
+css:
+  - "/assets/css/casino.css"
 ---
 
-<div class="project-logo-wrap">
-  <img class="project-logo" src="{{ '/assets/img/pandadnap.jpg' | relative_url }}" alt="PANDADNAP project logo">
-</div>
+<main class="casino-page">
+  <section class="casino-hero" id="entrance" aria-labelledby="hero-title">
+    <img class="hero-emblem" src="{{ '/assets/img/pandadnap.jpg' | relative_url }}" alt="PANDADNAP emblem" width="120" height="120">
+    <p class="eyebrow">A study in captions and chance</p>
+    <h1 id="hero-title">The Caption<br>Room</h1>
+    <p class="hero-intro">A data story on how captions meet the New Yorker Cartoon Caption Contest.</p>
+    <a class="button button-primary" href="#rules">Enter the room</a>
+    <p class="play-money-note">For practice only. Tokens have no monetary value.</p>
+  </section>
+
+  <div class="mock-banner" id="global-mock-banner" role="note" hidden>MOCK DATA: not our results</div>
+
+  <nav class="section-nav" aria-label="Story sections">
+    <a href="{{ '#dataset' | relative_url }}">The dataset</a>
+    <a href="{{ '#rules' | relative_url }}">House rules</a>
+    <a href="{{ '#table' | relative_url }}">The table</a>
+    <a href="{{ '#odds' | relative_url }}">The odds</a>
+    <a href="{{ '#behind-the-dealer' | relative_url }}">Behind the dealer</a>
+    <a href="{{ '#team' | relative_url }}">The team</a>
+  </nav>
+
+  <section class="story-section dataset-section" id="dataset" aria-labelledby="dataset-title">
+    <div class="section-heading">
+      <p class="eyebrow">Before the first hand</p>
+      <h2 id="dataset-title">The dataset</h2>
+      <p class="dataset-lead">Every week, readers submit captions for a New Yorker cartoon, and other readers rate them as not funny, somewhat funny or funny. We use the public archive of this contest.</p>
+    </div>
+
+    <dl class="dataset-stats" aria-label="Dataset summary">
+      {% for stat in site.data.dataset_stats %}
+      <div class="dataset-stat">
+        <dt>{{ stat.label }}</dt>
+        <dd>{{ stat.value }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+
+    <div class="dataset-details">
+      <article>
+        <h3>What is in a row</h3>
+        <p>The caption text, how many voters rated it not funny, somewhat funny or funny, its average rating from 1 to 3, its number of votes and its rank in the contest. For 240 of the 384 contests, hand-written descriptions of the cartoon are also available (Hessel et al.).</p>
+      </article>
+      <article>
+        <h3>What to keep in mind</h3>
+        <p>Votes are not spread evenly: the contest shows better-rated captions more often, so a caption with few votes has an unreliable score. The median caption has 84 votes, and we keep captions with at least 20 votes. Captions are short, about 10 words on average.</p>
+      </article>
+    </div>
+
+    <p class="dataset-note">Figures from our exploration notebook. <a href="{{ '#behind-the-dealer' | relative_url }}">How we use it</a></p>
+  </section>
+
+  <section class="story-section rules-section" id="rules" aria-labelledby="rules-title">
+    <div class="section-heading">
+      <p class="eyebrow">A brief guide</p>
+      <h2 id="rules-title">House rules</h2>
+      <p>Three steps. One choice at a time.</p>
+    </div>
+
+    <ol class="steps-grid">
+      <li><span class="step-number">01</span><h3>Study the cartoon</h3><p>Consider the scene before choosing a caption.</p></li>
+      <li><span class="step-number">02</span><h3>Choose a caption</h3><p>Select one of four options. Categories stay concealed until your choice.</p></li>
+      <li><span class="step-number">03</span><h3>Review the hand</h3><p>A score is drawn from a mock category distribution and converted to play tokens.</p></li>
+    </ol>
+
+    <div class="category-guide">
+      <h3>Four caption categories</h3>
+      <dl>
+        <div><dt><span class="suit-icon suit-explicit" aria-hidden="true">♠</span>Explicit</dt><dd>Meaning stated directly. <span class="placeholder-label">Working definition</span></dd></div>
+        <div><dt><span class="suit-icon suit-implicit" aria-hidden="true">♥</span>Implicit</dt><dd>Meaning left for the reader to infer. <span class="placeholder-label">Working definition</span></dd></div>
+        <div><dt><span class="suit-icon suit-general" aria-hidden="true">♦</span>General</dt><dd>A broad, non-specific caption. <span class="placeholder-label">Working definition</span></dd></div>
+        <div><dt><span class="suit-icon suit-original" aria-hidden="true">♣</span>Original</dt><dd>A caption submitted to the contest. <span class="placeholder-label">Working definition</span></dd></div>
+      </dl>
+    </div>
+
+    <p class="play-money-note">Tokens are play money. Scores and conversion rules are placeholders, not research findings. At a 10-token wager, each score point above or below 2.5 changes the balance by 4 tokens; losses are capped at the wager.</p>
+    <a class="button button-secondary" href="#table">Take a practice hand</a>
+  </section>
+
+  <section class="story-section table-section" id="table" aria-labelledby="table-title" data-payouts-url="{{ '/assets/data/payouts.json' | relative_url }}" data-rounds-url="{{ '/assets/data/rounds.json' | relative_url }}" data-asset-base="{{ '/assets/' | relative_url }}" data-icon-base="{{ '/assets/icons/' | relative_url }}">
+    <div class="section-heading">
+      <p class="eyebrow">Practice table</p>
+      <h2 id="table-title">The table</h2>
+      <p>Choose a caption. Review the category and its sampled score.</p>
+    </div>
+
+    <div class="mock-banner game-mock-banner" id="game-mock-banner" hidden>MOCK DATA: not our results</div>
+
+    <div class="bankroll-bar">
+      <div class="bankroll-chip" aria-live="polite">
+        <span class="chip chip-gold" aria-hidden="true"></span>
+        <span>Play balance</span>
+        <strong><span id="bankroll">100</span> tokens</strong>
+      </div>
+      <div class="bet-display">
+        <span class="bet-chips" aria-hidden="true"><span class="chip chip-burgundy"></span><span class="chip chip-green"></span></span>
+        <label class="bet-control" for="bet-amount">Wager
+          <select id="bet-amount" aria-label="Play tokens to wager">
+            <option value="5">5 tokens</option>
+            <option value="10" selected>10 tokens</option>
+            <option value="15">15 tokens</option>
+            <option value="20">20 tokens</option>
+            <option value="25">25 tokens</option>
+          </select>
+        </label>
+      </div>
+      <label class="strategy-control" for="strategy-mode">
+        <input id="strategy-mode" type="checkbox" disabled>
+        <span>Strategy mode <small id="strategy-hint">Available after 3 rounds</small></span>
+      </label>
+    </div>
+
+    <div class="table-layout">
+      <div class="round-card">
+        <div class="round-topline">
+          <span id="round-number">Round 1</span>
+          <span class="placeholder-label">Cartoon not provided</span>
+        </div>
+        <div class="cartoon-frame">
+          <img id="cartoon-image" class="cartoon-image" alt="" width="720" height="420" hidden>
+          <p id="cartoon-empty-state" class="cartoon-empty-state" role="status">No contest cartoon has been added.</p>
+        </div>
+        <div class="caption-area">
+          <h3>Select a caption</h3>
+          <div class="caption-grid" id="caption-options" role="group" aria-label="Caption options">
+            <p class="loading-message" role="status">Loading mock rounds…</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="dealer-card" aria-labelledby="dealer-title">
+        <div class="dealer-caption">
+          <img class="dealer-avatar" src="{{ '/assets/icons/nap-neutral.svg' | relative_url }}" alt="Nap, your dealer" width="88" height="88">
+          <span class="eyebrow">Your dealer</span>
+        </div>
+        <h3 id="dealer-title">The hand is yours</h3>
+        <p id="dealer-message" aria-live="polite">Choose a caption to begin. All tokens and score samples are for practice.</p>
+        <div class="result-panel" id="result-panel" aria-live="polite" hidden>
+          <img id="pan-mood" class="result-marker" alt="" width="56" height="56" hidden>
+          <span class="result-label">Hand result</span>
+          <strong id="result-payout"></strong>
+          <span id="result-category"></span>
+          <p id="nap-result-message"></p>
+        </div>
+        <button class="button button-secondary next-round-button" id="next-round" type="button" hidden>Next hand</button>
+        <button class="button button-secondary" id="play-100" type="button" disabled>Simulate 100 rounds</button>
+        <button class="reset-button" id="reset-game" type="button">Reset play balance</button>
+        <p class="simulation-note">Repeats your last category choice for 100 practice rounds. This is a hypothetical simulation.</p>
+      </aside>
+    </div>
+
+    <section class="simulation-panel" id="simulation-panel" aria-labelledby="simulation-title" hidden>
+      <h3 id="simulation-title">100-round simulation</h3>
+      <p id="simulation-summary" aria-live="polite"></p>
+      <div class="chart-scroll">
+        <svg id="bankroll-chart" class="bankroll-chart" viewBox="0 0 720 260" role="img" aria-labelledby="chart-title chart-description">
+          <title id="chart-title">Mock balance over 100 simulated rounds</title>
+          <desc id="chart-description">A line chart of the play-token balance during the practice simulation.</desc>
+          <g class="chart-grid" aria-hidden="true"></g>
+          <polyline class="chart-line" aria-hidden="true"></polyline>
+          <circle class="chart-endpoint" r="5" aria-hidden="true"></circle>
+        </svg>
+      </div>
+      <p class="chart-footnote" id="chart-footnote">Practice simulation only. This is not a result.</p>
+    </section>
+  </section>
+
+  <section class="story-section odds-section" id="odds" aria-labelledby="odds-title">
+    <div class="section-heading">
+      <p class="eyebrow">Questions under study</p>
+      <h2 id="odds-title">The odds</h2>
+      <p class="section-intro"><img class="section-character" src="{{ '/assets/icons/nap-explain.svg' | relative_url }}" alt="Nap explains the research" width="72" height="72">Analysis is in progress. These panels are placeholders, not evidence.</p>
+    </div>
+
+    <div class="odds-grid">
+      <article class="odds-card">
+        <h3><span class="suit-icon suit-explicit" aria-hidden="true">♠</span>Explicit vs. <span class="suit-icon suit-implicit" aria-hidden="true">♥</span>Implicit</h3>
+        <p>Do implicit captions score differently from explicit captions?</p>
+        <div class="empty-chart" role="img" aria-label="Placeholder chart; no results plotted"><span>Chart placeholder</span></div>
+        <fieldset class="verdict-picker"><legend>Your hypothesis</legend><button type="button" aria-pressed="false">Busted</button><button type="button" aria-pressed="false">Confirmed</button><button type="button" aria-pressed="false">Complicated</button></fieldset>
+        <p class="guess-note" aria-live="polite">No verdict selected.</p>
+      </article>
+      <article class="odds-card">
+        <h3><span class="suit-icon suit-original" aria-hidden="true">♣</span>Original vs. <span class="suit-icon suit-general" aria-hidden="true">♦</span>General</h3>
+        <p>Do original captions score differently from more common ones?</p>
+        <div class="empty-chart" role="img" aria-label="Placeholder chart; no results plotted"><span>Chart placeholder</span></div>
+        <fieldset class="verdict-picker"><legend>Your hypothesis</legend><button type="button" aria-pressed="false">Busted</button><button type="button" aria-pressed="false">Confirmed</button><button type="button" aria-pressed="false">Complicated</button></fieldset>
+        <p class="guess-note" aria-live="polite">No verdict selected.</p>
+      </article>
+      <article class="odds-card">
+        <h3>Spread at equal mean</h3>
+        <p>Does a wider spread feel riskier when averages are alike?</p>
+        <div class="empty-chart" role="img" aria-label="Placeholder chart; no results plotted"><span>Chart placeholder</span></div>
+        <fieldset class="verdict-picker"><legend>Your hypothesis</legend><button type="button" aria-pressed="false">Busted</button><button type="button" aria-pressed="false">Confirmed</button><button type="button" aria-pressed="false">Complicated</button></fieldset>
+        <p class="guess-note" aria-live="polite">No verdict selected.</p>
+      </article>
+      <article class="odds-card">
+        <h3><span class="suit-icon suit-implicit" aria-hidden="true">♥</span>Implicit + <span class="suit-icon suit-original" aria-hidden="true">♣</span>Original</h3>
+        <p>What happens when a caption is both implicit and original?</p>
+        <div class="empty-chart" role="img" aria-label="Placeholder chart; no results plotted"><span>Chart placeholder</span></div>
+        <fieldset class="verdict-picker"><legend>Your hypothesis</legend><button type="button" aria-pressed="false">Busted</button><button type="button" aria-pressed="false">Confirmed</button><button type="button" aria-pressed="false">Complicated</button></fieldset>
+        <p class="guess-note" aria-live="polite">No verdict selected.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="story-section method-section" id="behind-the-dealer" aria-labelledby="method-title">
+    <div class="section-heading">
+      <p class="eyebrow">Method and limits</p>
+      <h2 id="method-title">Behind the dealer</h2>
+      <p class="section-intro"><img class="section-character" src="{{ '/assets/icons/nap-explain.svg' | relative_url }}" alt="Nap explains the method" width="72" height="72">A plain-language account of the research will appear here.</p>
+    </div>
+    <div class="method-grid">
+      <article><h3>Hand-labelled captions</h3><p><span class="placeholder-label">Placeholder</span> Who labelled the captions, the labelling guide, and how disagreements were handled.</p></article>
+      <article><h3>Label checks</h3><p><span class="placeholder-label">Placeholder</span> How the labels were validated and checked for agreement.</p></article>
+      <article><h3>The language method</h3><p><span class="placeholder-label">Placeholder</span> A plain-language explanation of the NLP approach and its purpose.</p></article>
+      <article><h3>Limits of the data</h3><p><span class="placeholder-label">Placeholder</span> Sampling limits, uncertainty, and what this analysis cannot establish.</p></article>
+    </div>
+  </section>
+
+  <section class="story-section team-section" id="team" aria-labelledby="team-title">
+    <div class="section-heading">
+      <p class="eyebrow">The people at the table</p>
+      <h2 id="team-title">Meet the team</h2>
+      <p>Applied Data Analysis, EPFL, autumn 2026. Group 77, pandadnap.</p>
+    </div>
+    <div class="team-grid">
+      {% for member in site.data.team %}
+        {% assign name_parts = member.name | split: " " %}
+        {% assign initials = "" %}
+        {% for part in name_parts %}
+          {% assign initial = part | slice: 0 | upcase %}
+          {% assign initials = initials | append: initial %}
+        {% endfor %}
+        <article class="team-card">
+          {% if member.photo %}
+            <img class="team-monogram team-photo" src="{{ member.photo | relative_url }}" alt="{{ member.name }}" width="88" height="88">
+          {% else %}
+            <div class="team-monogram" aria-hidden="true">{{ initials }}</div>
+          {% endif %}
+          <h3>
+            {% if member.link %}<a href="{{ member.link | relative_url }}">{{ member.name }}</a>{% else %}{{ member.name }}{% endif %}
+          </h3>
+          <p class="team-role placeholder-copy">{{ member.role }}</p>
+          <p class="team-bio placeholder-copy">{{ member.bio }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="mock-banner mock-banner-bottom" id="bottom-mock-banner" role="note" hidden>MOCK DATA: not our results</div>
+</main>
+
+<script defer src="{{ '/assets/js/casino.js' | relative_url }}"></script>

@@ -1,0 +1,8 @@
+- value: "384"
+  label: "contests (one cartoon each)"
+- value: "2.3 million"
+  label: "captions"
+- value: "about 5,700"
+  label: "captions in a typical contest (median)"
+- value: "1.2 out of 3"
+  label: "median average rating (1 = not funny, 3 = funny)"

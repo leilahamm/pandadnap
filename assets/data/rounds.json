@@ -1,0 +1,68 @@
+[
+  {
+    "image": null,
+    "alt": "",
+    "captions": [
+      {
+        "category": "explicit",
+        "text": "[MOCK] Round 1, caption A \u2014 placeholder only."
+      },
+      {
+        "category": "implicit",
+        "text": "[MOCK] Round 1, caption B \u2014 placeholder only."
+      },
+      {
+        "category": "general",
+        "text": "[MOCK] Round 1, caption C \u2014 placeholder only."
+      },
+      {
+        "category": "original",
+        "text": "[MOCK] Round 1, caption D \u2014 placeholder only."
+      }
+    ]
+  },
+  {
+    "image": null,
+    "alt": "",
+    "captions": [
+      {
+        "category": "explicit",
+        "text": "[MOCK] Round 2, caption A \u2014 placeholder only."
+      },
+      {
+        "category": "implicit",
+        "text": "[MOCK] Round 2, caption B \u2014 placeholder only."
+      },
+      {
+        "category": "general",
+        "text": "[MOCK] Round 2, caption C \u2014 placeholder only."
+      },
+      {
+        "category": "original",
+        "text": "[MOCK] Round 2, caption D \u2014 placeholder only."
+      }
+    ]
+  },
+  {
+    "image": null,
+    "alt": "",
+    "captions": [
+      {
+        "category": "explicit",
+        "text": "[MOCK] Round 3, caption A \u2014 placeholder only."
+      },
+      {
+        "category": "implicit",
+        "text": "[MOCK] Round 3, caption B \u2014 placeholder only."
+      },
+      {
+        "category": "general",
+        "text": "[MOCK] Round 3, caption C \u2014 placeholder only."
+      },
+      {
+        "category": "original",
+        "text": "[MOCK] Round 3, caption D \u2014 placeholder only."
+      }
+    ]
+  }
+]
